@@ -4,10 +4,12 @@
 
 .mdl-layout-title{
 	margin: 0 auto;
+	font-weight: bold;
 }
 
 .mdl-card{
 	width: 100%;
+	/*cursor: pointer;*/
 }
 
 .name{
@@ -23,6 +25,36 @@
 	width: 100%;
 }
 
-.value{
+td{
 	text-align: center !important;
+	height: 10px !important;
+	min-height: 0 !important;
+	line-height: normal;
+}
+
+tr{
+	height: 10px !important;
+	min-height: 0 !important;
+}
+
+.type{
+	min-width: 0;
+	margin: 3px;
+	color: rgba(0,0,0,.6) !important;
+}
+
+.fire{
+	background: #EF5350;
+}
+
+.poison{
+	background: #AB47BC;
+}
+
+.electric{
+	background: #FFEE58;
+}
+
+.selected{
+	position: fixed;
 }
