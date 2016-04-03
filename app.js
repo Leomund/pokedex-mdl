@@ -1,36 +1,90 @@
-var a = Date.now();
-var spiner = document.getElementById("spiner");
-var content = document.getElementById("content");
-var xhr = new XMLHttpRequest();
-var limit = 12;
+$(function() {
+	var app = App();
+	app.start();
+});
 
-xhr.open("GET", "http://pokeapi.co/api/v1/pokemon/?limit=" + limit, true);
-xhr.send();
+var App = function(){
+	var pokeapi = "http://pokeapi.co",
+		pokemons = [],
+		next = undefined;
 
-xhr.onreadystatechange = function() {
-	if (xhr.readyState == 4 && xhr.status == 200) {
-		var res = JSON.parse(xhr.responseText);
-		console.log(res);
-		console.log("time: " + ((Date.now() - a)/1000).toFixed(2) + "s");
-		spiner.parentNode.removeChild(spiner);
+	var detailsTemplate = $("#pokemondetails").html(),
+		cardTemplate = $("#cards").html();
 
-
-
-		for(i = 0; i < limit; i++){
-			var types = "";
-			var pokemonCard = "";
-			for(var j in res.objects[i].types){
-
-				types += "<span class=\"type " + res.objects[i].types[j].name + " mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\"> " + res.objects[i].types[j].name + "</span>";
-			}
-
-			pokemonCard += "<div class=\"mdl-cell mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone\">";
-			pokemonCard += "<div class=\"mdl-card mdl-shadow--4dp\"><div class=\"mdl-card__media \">";
-			pokemonCard += "<img src=\"http:\/\/pokeapi.co/media/img/"+ res.objects[i].pkdx_id + ".png\"" +  "> </div>";
-			pokemonCard += "<div class=\"mdl-card__subtitle-text\"><h2 class=\"name\">" + res.objects[i].name + "</h2></div> <div class=\"mdl-card__actions mdl-card--border\">" + types + "</div></div></div>";
-
-			//pokemonCard += ("Pokemon #" + (i+1) + "; name: " + res.objects[i].name + "; id: " + res.objects[i].pkdx_id + "; types: " + types + "; image: http://pokeapi.co/media/img/" + i + ".png");
-			content.innerHTML += pokemonCard;
-		}
+	function getFromPokeapi(req, callback){
+		var startTime = Date.now();
+		
+		$.getJSON(pokeapi + req, function(res){
+			callback(startTime, res);
+		});
 	}
+
+	function handleLoadedDataAndStartTime(startTime, res) {
+		console.log("response time: " + ((Date.now() - startTime)/1000).toFixed(2));
+		handleLoadedData(res)
+	}
+
+	function handleLoadedData(res){
+		storeLoadedData(res);
+		renderPokemons(res.objects);
+	}
+
+	function storeLoadedData(res){
+		var objects = res.objects;
+		for(var i = 0; i < objects.length; i++){ 
+			pokemons.push(objects[i]);
+		}
+		next = res.meta.next;
+	}
+
+	function renderPokemons(pokemons) {
+		var data = {pokemons: pokemons},
+			cards = new EJS({text: cardTemplate}).render(data);
+
+		$("#spiner").hide();
+		$("#pokemons").append(cards);
+		$("#loadmore").show();
+	}
+
+	function getPokemonData(id) {
+		var pokemon = pokemons.filter(function(item){
+			return item.pkdx_id == id;
+		})[0];
+
+		return pokemon;
+	}
+
+	function renderPokemonDetails(pokemon){
+		var data = {pokemon: pokemon},
+			cards = new EJS({text: detailsTemplate}).render(data);
+
+		$(".selected").html(cards);
+	}
+
+	$("#pokemons").on("click", ".mdl-card", function(event) {
+		/*
+			target 			- clicked element
+			currentTarget	- child selector
+			delegateTarget	- parent selector
+		*/
+
+		var $card = $(event.currentTarget);
+		var id = $card.data("pkdx-id");
+		var pokemon = getPokemonData(id);
+
+		renderPokemonDetails(pokemon);
+	});
+
+	$(document).on("click", "#loadmore", function() {
+		$("#loadmore").hide();
+		$("#spiner").show();
+		getFromPokeapi(next, handleLoadedDataAndStartTime);
+	});
+
+	return {
+		start: function() {
+			$("#loadmore").hide();
+			getFromPokeapi("/api/v1/pokemon/?limit=12", handleLoadedDataAndStartTime);
+		}
+	};
 };
