@@ -55,10 +55,14 @@ var App = function(){
 	}
 
 	function renderPokemonDetails(pokemon){
-		var data = {pokemon: pokemon},
-			cards = new EJS({text: detailsTemplate}).render(data);
+		if($(".selected").is(":visible")){
+			var data = {pokemon: pokemon},
+				card = new EJS({text: detailsTemplate}).render(data);
 
-		$(".selected").html(cards);
+			$(".selected").html(card);
+		}else{
+			console.log("renderPokemonDetails to modal...")
+		}
 	}
 
 	$("#pokemons").on("click", ".mdl-card", function(event) {
