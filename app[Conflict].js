@@ -5,11 +5,11 @@ $(function() {
 
 var App = function(){
 	var pokeapi = "http://pokeapi.co",
-	pokemons = [],
-	next = undefined;
+		pokemons = [],
+		next = undefined;
 
 	var detailsTemplate = $("#pokemondetails").html(),
-	cardTemplate = $("#cards").html();
+		cardTemplate = $("#cards").html();
 
 	function getFromPokeapi(req, callback){
 		var startTime = Date.now();
@@ -39,7 +39,7 @@ var App = function(){
 
 	function renderPokemons(pokemons) {
 		var data = {pokemons: pokemons},
-		cards = new EJS({text: cardTemplate}).render(data);
+			cards = new EJS({text: cardTemplate}).render(data);
 
 		$("#spiner").hide();
 		$("#pokemons").append(cards);
@@ -55,31 +55,10 @@ var App = function(){
 	}
 
 	function renderPokemonDetails(pokemon){
-		if($(".selected").is(":visible")){
-			var data = {pokemon: pokemon},
-			card = new EJS({text: detailsTemplate}).render(data);
+		var data = {pokemon: pokemon},
+			cards = new EJS({text: detailsTemplate}).render(data);
 
-			$(".selected").html(card);
-		}else{
-			console.log("renderPokemonDetails to modal...");
-
-			var dialog = document.querySelector('dialog');
-
-			if (! dialog.showModal) {
-				dialogPolyfill.registerDialog(dialog);
-			}
-
-			var data = {pokemon: pokemon},
-			card = new EJS({text: detailsTemplate}).render(data);
-
-			$(".mdl-dialog__content").html(card);
-			
-			dialog.showModal();
-
-			dialog.querySelector('.close').addEventListener('click', function() {
-				dialog.close();
-			});
-		}
+		$(".selected").html(cards);
 	}
 
 	$("#pokemons").on("click", ".mdl-card", function(event) {
@@ -87,16 +66,16 @@ var App = function(){
 			target 			- clicked element
 			currentTarget	- child selector
 			delegateTarget	- parent selector
-			*/
+		*/
 
-			var $card = $(event.currentTarget);
-			var id = $card.data("pkdx-id");
-			var pokemon = getPokemonData(id);
+		var $card = $(event.currentTarget);
+		var id = $card.data("pkdx-id");
+		var pokemon = getPokemonData(id);
 
-			renderPokemonDetails(pokemon);
-		});
+		renderPokemonDetails(pokemon);
+	});
 
-	$(document).on("click", "#loadmore", function() {
+	$("#loadmore").on("click", function() {
 		$("#loadmore").hide();
 		$("#spiner").show();
 		getFromPokeapi(next, handleLoadedDataAndStartTime);
@@ -104,7 +83,6 @@ var App = function(){
 
 	return {
 		start: function() {
-			$("#loadmore").hide();
 			getFromPokeapi("/api/v1/pokemon/?limit=12", handleLoadedDataAndStartTime);
 		}
 	};

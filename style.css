@@ -64,6 +64,10 @@ tr{
 	display: none;
 }
 
+.mdl-dialog__content{
+	padding: 0;
+}
+
 .type{
 	margin: 3px;
 	color: white;
