@@ -64,8 +64,13 @@ tr{
 	display: none;
 }
 
-.mdl-dialog__content{
+.mdl-dialog__content, .mdl-dialog{
 	padding: 0;
+}
+
+.mdl-dialog .mdl-cell{
+	margin: 0;
+	width: 100%;
 }
 
 .type{

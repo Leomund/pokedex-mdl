@@ -55,12 +55,12 @@ var App = function(){
 	}
 
 	function renderPokemonDetails(pokemon){
-		if($(".selected").is(":visible")){
-			var data = {pokemon: pokemon},
-			card = new EJS({text: detailsTemplate}).render(data);
+		// if($(".selected").is(":visible")){
+		// 	var data = {pokemon: pokemon},
+		// 	card = new EJS({text: detailsTemplate}).render(data);
 
-			$(".selected").html(card);
-		}else{
+		// 	$(".selected").html(card);
+		// }else{
 			console.log("renderPokemonDetails to modal...");
 
 			var dialog = document.querySelector('dialog');
@@ -79,7 +79,7 @@ var App = function(){
 			dialog.querySelector('.close').addEventListener('click', function() {
 				dialog.close();
 			});
-		}
+		// }
 	}
 
 	$("#pokemons").on("click", ".mdl-card", function(event) {
