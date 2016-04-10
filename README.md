@@ -1,5 +1,4 @@
 # pokedex
-========
 
 the test task for Kottans.org
 
