@@ -1,0 +1,214 @@
+.mdl-layout__header-row{
+	padding: 0 40px;
+}
+
+.mdl-layout-title{
+	margin: 0 auto;
+	font-weight: bold;
+}
+
+.mdl-card{
+	width: 100%;
+	cursor: pointer;
+	transition: all .1s linear;
+}
+
+.mdl-card:hover, .mdl-card:active{
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+@media (max-width: 479px) {
+	#content{
+		width: 100% !important;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+}
+
+.name{
+	font-size: 24px;
+	text-align: center;
+}
+
+.mdl-card__media{
+	width: 100%;
+	height: auto;
+}
+
+.mdl-card__media img{
+	width: 100%;
+	height: auto;
+}
+
+.mdl-data-table{
+	width: 100%;
+}
+
+td{
+	text-align: center !important;
+	height: 10px !important;
+	min-height: 0 !important;
+	line-height: normal;
+}
+
+tr{
+	height: 10px !important;
+	min-height: 0 !important;
+}
+
+#fail{
+	width: 100%;
+	text-align: center;
+}
+
+.img-placeholder{
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.value{
+	text-transform: uppercase;
+}
+
+#loadmore{
+	display: none;
+}
+
+.modal-body{
+	padding: 0;
+}
+
+.modal-body .mdl-cell{
+	margin: 0;
+	width: 100%;
+}
+
+.modal-content{
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.modal-body .mdl-cell .mdl-card{
+	box-shadow: none;
+}
+
+.close-button{
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	display: block;
+	height: 50px;
+	width: 50px;
+	right: 5px;
+	font-size: 3em;
+	color: white;
+	z-index: 2;
+	background: transparent;
+	border: none;
+}
+
+.type{
+	margin: 3px;
+	color: white;
+	border-radius: 2px;
+	height: 36px;
+	padding: 0 16px;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0;
+	overflow: hidden;
+	outline: none;
+	text-align: center;
+    line-height: 36px;
+    vertical-align: middle;
+}
+
+#pokemons{
+	width: 100% !important;
+	padding: 0;
+}
+
+.selected{
+	position: fixed;
+}
+
+#spiner{
+	text-align: center;
+}
+
+.normal{
+	background: #989965
+}
+
+.fire{
+	background: #EA6B25;
+}
+
+.poison{
+	background: #8D288E;
+}
+
+.electric{
+	background: #F5C825;
+}
+
+.grass{
+	background: #67C03F
+}
+
+.water{
+	background: #5679EC;
+}
+
+.bug{
+	background: #98AE1A;
+}
+
+.flying{
+	background: #9778EC;
+}
+
+.fairy{
+	background: #E7849C;
+}
+
+.ground{
+	background: #D8B456;
+}
+
+.psychic{
+	background: #F43D75;
+}
+
+.fighting{
+	background: #B01D1F;
+}
+
+.rock{
+	background: #A9912B;
+}
+
+.ice{
+	background: #88D0CE;
+}
+
+.ghost{
+	background: #5C4386;
+}
+
+.dark{
+	background: #503D31;
+}
+
+.dragon{
+	background: #5B10F6;
+}
+
+.steel{
+	background: #A9A8C5;
+}
