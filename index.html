@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="theme-color" content="#118575">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<title>Pokédex</title>
+
+	<link rel="stylesheet" href="bower_components/roboto-fontface/css/roboto-fontface.css">
+
+	<link rel="stylesheet" href="css/material.teal-indigo.min.css">
+	<link rel="stylesheet" href="css/bootstrap-modal.css">
+	<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				<span class="mdl-layout-title">Pokédex</span>
+			</div>
+		</header>
+		<main class="mdl-layout__content">
+			<div class="page-content mdl-grid">
+				<div id="content" class="mdl-cell mdl-grid mdl-cell--9-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone">
+
+					<div id="pokemons" class="mdl-grid">
+					</div>
+					
+					<div id="spinner" class="mdl-cell mdl-cell--12-col">
+						<div class="mdl-spinner mdl-js-spinner is-active"></div>
+					</div>
+
+					<button id="loadmore" class="mdl-cell mdl-cell--12-col mdl-button mdl-js-button mdl-js-ripple-effect">Load more</button>
+
+				</div>
+
+
+				<div class="selected mdl-cell mdl-grid mdl-cell--3-col-desktop mdl-cell--4-col-tablet mdl-cell--hide-phone">
+					
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<button type="button" class="close-button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<div class="modal-body">
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script id="pokemondetails" type="text/x-ejs-template">
+		<div class="mdl-cell mdl-cell--12-col">
+			<div class="mdl-card mdl-shadow--2dp">
+				<div class="mdl-card__media">
+					<img class="img-placeholder" src="img/placeholder.jpeg">
+					<img src="http://pokeapi.co/media/img/<%= pokemon.pkdx_id %>.png" alt="">
+				</div>
+
+				<div class="mdl-card__subtitle-text">
+					<h1 class="name"><%= pokemon.name %> #<%= pokemon.pkdx_id %></h1>
+					<table class="mdl-data-table mdl-js-data-table">
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Type</td>
+							<td class="mdl-data-table__cell--non-numeric value">
+								<% for(var j in pokemon.types) { %>
+								<%= pokemon.types[j].name %>
+								<% } %>
+							</td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Attack</td>
+							<td class="value"><%= pokemon.attack %></td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Defense</td>
+							<td class="value"><%= pokemon.defense %></td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">HP</td>
+							<td class="value"><%= pokemon.hp %></td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">SP Attak</td>
+							<td class="value"><%= pokemon.sp_atk %></td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">SP Defence</td>
+							<td class="value"><%= pokemon.sp_def %></td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Speed</td>
+							<td class="value"><%= pokemon.speed %></td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Weight</td>
+							<td class="value"><%= pokemon.weight %></td>
+						</tr>
+						<tr>
+							<td class="mdl-data-table__cell--non-numeric">Total moves</td>
+							<td class="value"><%= pokemon.moves.length %></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<script id="cards" type="text/x-ejs-template">
+		<% for(var i=0; i < pokemons.length; i++) { %>
+		<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--12-col-tablet mdl-cell--2-col-phone">
+			<div data-pkdx-id="<%= pokemons[i].pkdx_id %>" class="mdl-card mdl-shadow--4dp">
+				<div class="mdl-card__media ">
+					<img class="img-placeholder" src="img/placeholder.jpeg">
+					<img class="name" src="http://pokeapi.co/media/img/<%= pokemons[i].pkdx_id %>.png">
+				</div>
+				<div class="mdl-card__subtitle-text">
+					<h2 class="name"><%= pokemons[i].name %></h2>
+				</div>
+				<div class="mdl-card__actions mdl-card--border">
+					<% for(var j in pokemons[i].types) { %>
+					<span class="type <%= pokemons[i].types[j].name %>"><%= pokemons[i].types[j].name %></span>
+					<% } %>
+				</div>
+			</div>
+		</div>
+		<% } %>
+	</script>
+	
+	<script src="js/ejs/ejs_production.js"></script>
+	<script defer src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script defer src="bower_components/material-design-lite/material.min.js"></script>
+	<script defer src="js/bootstrap-modal.js"></script>
+	<script defer src="js/app.js"></script>
+
+
+</body>
+</html>
