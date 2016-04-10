@@ -14,7 +14,7 @@ var App = function() {
 		})
 		.fail(function() {
 			
-			$("#spiner").hide();
+			$("#spinner").hide();
 			if(!$("#fail").length){
 				$("#pokemons").append("<h2 id=\"fail\">Failed to retrive data.</h2>");
 			}
@@ -47,7 +47,7 @@ var App = function() {
 		var data = {pokemons: pokemons},
 		cards = new EJS({text: cardTemplate}).render(data);
 
-		$("#spiner").hide();
+		$("#spinner").hide();
 		$("#pokemons").append(cards);
 		$("#loadmore").show();
 	}
@@ -78,7 +78,7 @@ var App = function() {
 	}
 
 	$("#pokemons").on("click", ".mdl-card", function(event) {
-		/*
+			/*
 			target 			- clicked element
 			currentTarget	- child selector
 			delegateTarget	- parent selector
@@ -93,7 +93,7 @@ var App = function() {
 
 	$(document).on("click", "#loadmore", function() {
 		$("#loadmore").hide();
-		$("#spiner").show();
+		$("#spinner").show();
 		getFromPokeapi(next, handleLoadedDataAndStartTime);
 	});
 

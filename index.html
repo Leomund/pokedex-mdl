@@ -29,7 +29,7 @@
 					<div id="pokemons" class="mdl-grid">
 					</div>
 					
-					<div id="spiner" class="mdl-cell mdl-cell--12-col">
+					<div id="spinner" class="mdl-cell mdl-cell--12-col">
 						<div class="mdl-spinner mdl-js-spinner is-active"></div>
 					</div>
 
@@ -63,6 +63,7 @@
 		<div class="mdl-cell mdl-cell--12-col">
 			<div class="mdl-card mdl-shadow--2dp">
 				<div class="mdl-card__media">
+					<img class="img-placeholder" src="img/placeholder.jpeg">
 					<img src="http://pokeapi.co/media/img/<%= pokemon.pkdx_id %>.png" alt="">
 				</div>
 
@@ -120,8 +121,8 @@
 		<div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--12-col-tablet mdl-cell--2-col-phone">
 			<div data-pkdx-id="<%= pokemons[i].pkdx_id %>" class="mdl-card mdl-shadow--4dp">
 				<div class="mdl-card__media ">
+					<img class="img-placeholder" src="img/placeholder.jpeg">
 					<img class="name" src="http://pokeapi.co/media/img/<%= pokemons[i].pkdx_id %>.png">
-					<img class="img-placeholder" src="http://placehold.it/100/100">
 				</div>
 				<div class="mdl-card__subtitle-text">
 					<h2 class="name"><%= pokemons[i].name %></h2>
