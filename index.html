@@ -63,7 +63,7 @@
 			<div class="mdl-card mdl-shadow--2dp">
 				<div class="mdl-card__media">
 					<img class="img-placeholder" src="img/placeholder.jpeg">
-					<img src="http://pokeapi.co/media/img/<%= pokemon.pkdx_id %>.png" alt="">
+					<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/<%= pokemon.pkdx_id %>.png" alt="">
 				</div>
 
 				<div class="mdl-card__subtitle-text">
@@ -121,7 +121,7 @@
 			<div data-pkdx-id="<%= pokemons[i].pkdx_id %>" class="mdl-card mdl-shadow--4dp">
 				<div class="mdl-card__media ">
 					<img class="img-placeholder" src="img/placeholder.jpeg">
-					<img class="name" src="http://pokeapi.co/media/img/<%= pokemons[i].pkdx_id %>.png">
+					<img class="name" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/<%= pokemons[i].pkdx_id %>.png" onerror="this.style.display='none'">
 				</div>
 				<div class="mdl-card__subtitle-text">
 					<h2 class="name"><%= pokemons[i].name %></h2>
