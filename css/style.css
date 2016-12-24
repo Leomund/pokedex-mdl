@@ -52,6 +52,7 @@ td{
 	height: 10px !important;
 	min-height: 0 !important;
 	line-height: normal;
+	width: 50%;
 }
 
 tr{
@@ -143,6 +144,7 @@ tr{
 	overflow: auto;
 	top: 0;
 	bottom: 0;
+	right: 0;
 }
 
 .selected .mdl-card:hover{
